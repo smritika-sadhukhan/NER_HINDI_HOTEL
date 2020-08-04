@@ -53,7 +53,7 @@ bar_model = tf.keras.models.Model(emb, x)
 
 # from tensorflow.keras.models import load_weights
 model1 = bar_model
-model1.load_weights('/content/NER_HINDI_HOTEL.h5')
+model1.load_weights('NER_HINDI_HOTEL/Hindi_Hotel_NER/Model/NER_HINDI_HOTEL.h5')
 
 model1.compile(loss='categorical_crossentropy',
               optimizer='adam',
