@@ -59,7 +59,7 @@ model1.compile(loss='categorical_crossentropy',
               optimizer='adam',
               metrics=['accuracy'])
 
-import pickle
+
 with open('/content/drive/My Drive/word_vec.pkl','rb') as f:
     word_vec = pickle.load(f)
 
@@ -71,6 +71,7 @@ def prepo_string(text:str, word2id:dict=word2id, maxlen:int=50, unknown:str='unk
     tokens = tokens + ([word2id.get(padding)]*(maxlen-len(tokens)))
     return tokens[:maxlen]
 
+
 def predict(text):
     list1=[]
     inp = np.asarray([prepo_string(text)])
@@ -79,12 +80,13 @@ def predict(text):
     arr = np.array(list1) 
     res = model1.predict(arr)
     result = res.argmax(-1)[0]
-    return [id2classes[i] for i in result]
+    return [id2classes[i] for i in result],result,res
 
 def predict_NER(data):
   for i in data:
-   r=predict(i)
+   r,result,res=predict(i)
    print(' ')
    for i,j in zip(i.split(), r):
-        print(i.ljust(15), j)
+        print(i.ljust(15), j.ljust(25),res[0][r.index(j)][result[r.index(j)]])
    print('-'*50)
+  
